@@ -19,16 +19,24 @@ public class OperationHandler {
 	}
 	
 	private static Response<ByteString> handleRequest(final Request request){
-		Expression exp = new Expression(Boolean.FALSE);
+		Expression expressionObject = null;
 		
 		if(request.payload().isPresent()){
 			final String json = new String(request.payload().get().toByteArray());
-			exp = gson.fromJson(json, Expression.class);
-			OperationHelper oh = new OperationHelper();
-			oh.evaluate(exp);
+			expressionObject = gson.fromJson(json, Expression.class);
+			evaluateExpression(expressionObject);
+		}else{
+			expressionObject = new Expression(Boolean.FALSE, "No payload in request");
 		}
 		
-		//TODO if is null what we should do?
-		return  Response.ok().withPayload(ByteString.encodeUtf8(gson.toJson(exp)));
+		return  createHandlerResponse(expressionObject);
+	}
+	
+	private static void evaluateExpression(final Expression expression){
+		new OperationHelper().evaluate(expression);
+	}
+	
+	private static Response<ByteString> createHandlerResponse(final Expression expression){
+		return Response.ok().withPayload(ByteString.encodeUtf8(gson.toJson(expression)));
 	}
 }

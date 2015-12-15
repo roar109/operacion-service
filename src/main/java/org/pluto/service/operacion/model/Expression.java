@@ -10,8 +10,9 @@ public class Expression {
 	public Expression() {
 	}
 
-	public Expression(final boolean valid) {
+	public Expression(final boolean valid, final String errorMessage) {
 		this.valid = valid;
+		this.errorMessage = errorMessage;
 	}
 
 	public Boolean getValid() {

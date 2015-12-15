@@ -16,22 +16,6 @@ public class OperationHelper {
 	private Stack<String> pila = new Stack<String>();
 
 	/**
-	 * Represents main
-	 *
-	 * @param args
-	 * @since Aug 11, 2015
-	 *
-	 */
-	public static void main(final String... args) {
-		final OperationHelper operacion = new OperationHelper();
-		Expression result = new Expression();
-		result.setExpression("1000-(6+3+2+1)");
-		result = operacion.evaluate(result);
-		System.out.println(result.getValid());
-		System.out.println(result.getResult());
-	}
-
-	/**
 	 * Descripcion: Metodo que evalua una expresion que se le pasa de parametros
 	 * por ejemplo<br/>
 	 * 25000*1251.
@@ -156,17 +140,12 @@ public class OperationHelper {
 		} else if (a.equals("^")) {
 			eva = 3;
 		}
-		// else{
-		// eva = 4;
-		// }
-		// }else if (a.equals("(") || a.equals(")"))
-		// eva = 5;
 		return eva;
 	}
 
 	/**
 	 * Le da formato a la cadena de entrada, separa la cadena por numeros o
-	 * operdores.
+	 * operadores.
 	 */
 	private void formatearCadenaEntrada(final String cadenaEntrada) {
 		String tmp = "";
